@@ -105,7 +105,11 @@
                                                                 <?php foreach ($detail as $row): ?>
                                                                 <!--<td><?php // echo form_checkbox('check[]',$row->id_perbekalan);?></td>-->
                                                                 <td><?php echo $n++; ?></td>
-                                                                <td><?php echo $row->no_inv; ?></td>
+                                                                <td><div align="center">
+                                                                    <?php echo $row->no_inv; ?><br>
+                                                                    <?php echo anchor('perbekalan/qrcode/'.$row->id_perbekalan, 'Generate QRCode', array('class'=>'btn btn-mini btn-primary'))?>
+                                                                    </div>
+                                                                </td>
 																<td><?php echo $row->tanggal; ?></td>
                                                                 <td><?php echo $row->nama_aset; ?></td>
                                                                 <td><?php echo $row->merk;?> / <?php echo $row->model;?></td>
