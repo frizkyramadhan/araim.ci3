@@ -87,7 +87,7 @@
                                                             <tr>
                                                                 <!--<th style="width: 20px"></th>-->
                                                                 <th>No.</th>
-                                                                <th>Inventory No.</th>
+                                                                <th>Inv No.</th>
 																<th>Date</th>
                                                                 <th>Asset</th>
                                                                 <th>Merk / Model</th>
