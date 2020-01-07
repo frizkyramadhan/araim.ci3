@@ -43,7 +43,7 @@
 							  </div>
 							</div>
 							<div class="control-group">
-							  <label class="control-label">Inventory No.</label>
+							  <label class="control-label">QR Code</label>
 							  <div class="controls">
                                                               <input type="text" class="span6"  value="<?php echo $detail->no_inv; ?>" disabled/>
 							  </div>
