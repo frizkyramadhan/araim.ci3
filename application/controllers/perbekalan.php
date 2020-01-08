@@ -320,12 +320,12 @@ class Perbekalan extends CI_Controller {
         return array('Inventory No.','Asset','Merk','Model','Date','PIC','Project');
     }
 
-    // function coba_qrcode(){
-    //     $qrCode = new Endroid\QrCodeQrCode('Life is too short to be generating QR codes');
+    function coba_qrcode(){
+        $qrCode = new Endroid\QrCode\QrCode('Life is too short to be generating QR codes');
 
-    //     header('Content-Type: '.$qrCode->getContentType());
-    //     echo $qrCode->writeString();
-    // }
+        header('Content-Type: '.$qrCode->getContentType());
+        echo $qrCode->writeString();
+    }
 }
 
 ?>
