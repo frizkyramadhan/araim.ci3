@@ -93,8 +93,7 @@
                                                                 <th>Merk / Model</th>
                                                                 <th>S/N / P/N</th>
 																<th>PO No.</th>
-                                                                <th>Ref No.</th>
-																<th>Ref Date</th>
+                                                                <th><div align="center">QR Code</div></th>
                                                                 <th><div align="center">Status</div></th>
                                                                 <th><div align="center">Action</div></th>
                                                             </tr>
@@ -115,8 +114,7 @@
                                                                 <td><?php echo $row->merk;?> / <?php echo $row->model;?></td>
 																<td><?php echo $row->sn;?> / <?php echo $row->pn;?></td>
 																<td><?php echo $row->po; ?></td>
-                                                                <td><?php echo $row->ref_no; ?></td>
-																<td><?php echo $row->ref_date; ?></td>
+                                                                <td><div align="center"><img src="<?php echo base_url();?>img/qrcode/qr-<?php echo $row->id_perbekalan?>.png" width="100"></div></td>
                                                                 <td><div align="center">
                                                                     <?php if($row->status == "Available"):?>
                                                                     <span class="label label-success"><?php echo $row->status;?></span>

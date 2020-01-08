@@ -326,6 +326,18 @@ class Perbekalan extends CI_Controller {
         header('Content-Type: '.$qrCode->getContentType());
         echo $qrCode->writeString();
     }
+
+    function qrcode($id){
+        $data['title'] = "Inventory Data";
+        $data['subtitle'] = "QRCode Data Detail";
+        $this->load->view('header', $data);
+        $this->load->view('nav');
+        
+        $data['qrcode'] = $this->perbekalan_m->detail_aset($id);
+        $this->load->view('perbekalan/qrcode', $data);
+        $this->load->view('footer');
+        
+    }
 }
 
 ?>
