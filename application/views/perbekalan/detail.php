@@ -106,7 +106,7 @@
                                                                 <td><?php echo $n++; ?></td>
                                                                 <td><div align="center">
                                                                     <?php echo $row->no_inv; ?><br>
-                                                                    <?php echo anchor('perbekalan/qrcode/'.$row->id_perbekalan, 'Generate QRCode', array('class'=>'btn btn-mini btn-primary'))?>
+                                                                    <?php echo anchor('perbekalan/qrcode/'.$data_pengguna->nik.'/'.$row->id_perbekalan, 'Generate QRCode', array('class'=>'btn btn-mini btn-primary'))?>
                                                                     </div>
                                                                 </td>
 																<td><?php echo $row->tanggal; ?></td>
@@ -114,7 +114,15 @@
                                                                 <td><?php echo $row->merk;?> / <?php echo $row->model;?></td>
 																<td><?php echo $row->sn;?> / <?php echo $row->pn;?></td>
 																<td><?php echo $row->po; ?></td>
-                                                                <td><div align="center"><img src="<?php echo base_url();?>img/qrcode/qr-<?php echo $row->id_perbekalan?>.png" width="100"></div></td>
+                                                                <td>
+                                                                    <div align="center">
+                                                                        <?php if(empty($row->qrcode)):?>
+                                                                        <?php else:?>
+                                                                        <img src="<?php echo base_url();?>img/qrcode/<?php echo $row->qrcode?>" width="100">
+                                                                        <?php echo anchor('perbekalan/delete_qrcode/'.$data_pengguna->nik.'/'.$row->id_perbekalan, 'X', array('onclick'=>"return confirm('Are you want to delete this qrcode?')"))?>
+                                                                        <?php endif;?>
+                                                                    </div>
+                                                                </td>
                                                                 <td><div align="center">
                                                                     <?php if($row->status == "Available"):?>
                                                                     <span class="label label-success"><?php echo $row->status;?></span>

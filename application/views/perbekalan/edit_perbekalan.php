@@ -30,6 +30,7 @@
 						</div>
 					</div>
 					<div class="box-content">
+					<!-- <pre><?php echo print_r($perbekalan)?></pre> -->
                                             <form class="form-horizontal" role="form" action="" method="post">
 						  <fieldset>
                                                         <div class="control-group">

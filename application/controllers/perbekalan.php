@@ -327,16 +327,29 @@ class Perbekalan extends CI_Controller {
         echo $qrCode->writeString();
     }
 
-    function qrcode($id){
-        $data['title'] = "Inventory Data";
-        $data['subtitle'] = "QRCode Data Detail";
-        $this->load->view('header', $data);
-        $this->load->view('nav');
+    function qrcode($nik, $id){
+        $perbekalan = $this->perbekalan_m->select($id);
         
-        $data['qrcode'] = $this->perbekalan_m->detail_aset($id);
-        $this->load->view('perbekalan/qrcode', $data);
-        $this->load->view('footer');
-        
+        $qrCode = new Endroid\QrCode\QrCode('No. Inventori = '.$perbekalan->no_inv.'');
+        $qrCode->writeFile('img/qrcode/qr-'.$perbekalan->id_perbekalan.'.png');
+
+        $this->db->set('qrcode','qr-'.$perbekalan->id_perbekalan.'.png');
+        $this->db->where('id_perbekalan',$id);
+        $this->db->update('perbekalan');  
+        redirect('perbekalan/detail/'.$nik);
+    }
+
+    function delete_qrcode($nik, $id) {
+        $this->db->where('id_perbekalan',$id);
+        $query = $this->db->get('perbekalan');
+        $row = $query->row();
+
+        unlink("./img/qrcode/$row->qrcode");
+
+        $data = array ('id_perbekalan' => $id, 'qrcode' => "");
+        $this->db->where('id_perbekalan', $id);
+        $this->db->update('perbekalan', $data);
+        redirect('perbekalan/detail/'.$nik);
     }
 }
 
