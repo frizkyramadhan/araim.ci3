@@ -118,7 +118,7 @@
                                                                     <div align="center">
                                                                         <?php if(empty($row->qrcode)):?>
                                                                         <?php else:?>
-                                                                        <img src="<?php echo base_url();?>img/qrcode/<?php echo $row->qrcode?>" width="100">
+                                                                        <img src="<?php echo base_url();?>img/qrcode/<?php echo $row->qrcode?>" width="100"><br>
                                                                         <?php echo anchor('perbekalan/delete_qrcode/'.$data_pengguna->nik.'/'.$row->id_perbekalan, 'X', array('onclick'=>"return confirm('Are you want to delete this qrcode?')"))?>
                                                                         <?php endif;?>
                                                                     </div>
