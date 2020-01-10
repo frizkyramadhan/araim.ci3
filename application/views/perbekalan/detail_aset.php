@@ -18,7 +18,7 @@
 					<a href="#">Asset Detail</a>
 				</li>
 			</ul>
-                            
+            <pre><?php echo print_r($detail)?></pre>
 			<div class="row-fluid sortable">
 				<div class="box span12">
 					<div class="box-header" data-original-title>

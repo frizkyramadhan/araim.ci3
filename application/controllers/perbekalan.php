@@ -328,10 +328,19 @@ class Perbekalan extends CI_Controller {
     }
 
     function qrcode($nik, $id){
-        $perbekalan = $this->perbekalan_m->select($id);
-        
-        $qrCode = new Endroid\QrCode\QrCode('No. Inventori = '.$perbekalan->no_inv.'');
+        $perbekalan = $this->perbekalan_m->detail_aset($id);
+        //var_dump($perbekalan);
+        $isi_teks = "No. Inventori = ".$perbekalan->no_inv."\n";
+        $isi_teks .= "Nama Aset = ".$perbekalan->nama_aset."\n";
+        $isi_teks .= "Merk = ".$perbekalan->merk."\n";
+        $isi_teks .= "Model = ".$perbekalan->model."\n";
+        $isi_teks .= "Spesifikasi = ".$perbekalan->spesifikasi."\n";
+        $isi_teks .= "Lokasi = ".$perbekalan->lokasi."\n";
+        $isi_teks .= "Keterangan = ".$perbekalan->remarks."\n";
+        // $qrCode = new Endroid\QrCode\QrCode('No. Inventori = '.$perbekalan->no_inv.'');
+        $qrCode = new Endroid\QrCode\QrCode($isi_teks);
         $qrCode->writeFile('img/qrcode/qr-'.$perbekalan->id_perbekalan.'.png');
+        //$qrCode->setText($isi_teks);
 
         $this->db->set('qrcode','qr-'.$perbekalan->id_perbekalan.'.png');
         $this->db->where('id_perbekalan',$id);
