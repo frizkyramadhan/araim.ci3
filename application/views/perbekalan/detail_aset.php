@@ -18,9 +18,9 @@
 					<a href="#">Asset Detail</a>
 				</li>
 			</ul>
-            <pre><?php echo print_r($detail)?></pre>
+            <!-- <pre><?php echo print_r($detail)?></pre> -->
 			<div class="row-fluid sortable">
-				<div class="box span12">
+				<div class="box span7">
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon white edit"></i><span class="break"></span><?php echo $subtitle;?></h2>
 						<div class="box-icon">
@@ -136,6 +136,19 @@
 						</form>   
 					</div>
 				</div><!--/span-->
+				<div class="box span4">
+				<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon white qrcode"></i><span class="break"></span>QR Code</h2>
+						<div class="box-icon">
+							
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+					disini
+					</div>
+				</div>
 
 			</div><!--/row-->    
 
