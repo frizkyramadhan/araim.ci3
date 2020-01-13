@@ -205,6 +205,29 @@ class Perbekalan_m extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    function getQrcode($nik) {
+        $where = 'perbekalan.qrcode IS NOT NULL';
+        $this->db->select('*');
+        $this->db->from('perbekalan');
+        $this->db->from('aset');
+        $this->db->from('kategori');
+        $this->db->from('karyawan');
+        $this->db->from('jabatan');
+        $this->db->from('project');
+        $this->db->from('departemen');
+        $this->db->where('karyawan.id_jabatan = jabatan.id_jabatan');
+        $this->db->where('karyawan.id_project = project.id_project');
+        $this->db->where('jabatan.id_dept = departemen.id_dept');
+        $this->db->where('perbekalan.id_karyawan = karyawan.id_karyawan');
+        $this->db->where('perbekalan.id_aset = aset.id_aset');
+        $this->db->where('aset.id_kategori = kategori.id_kategori');
+        $this->db->where('karyawan.nik = "'. $nik.'"');
+        $this->db->where($where);
+        $this->db->order_by('perbekalan.tanggal','desc');
+        $query = $this->db->get();
+        return $query->result();
+    }
     
     function generateAutoid(){ 
              
