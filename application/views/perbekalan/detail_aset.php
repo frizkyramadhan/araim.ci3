@@ -145,8 +145,11 @@
 							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
 						</div>
 					</div>
-					<div class="box-content">
-					disini
+					<div class="box-content" align="center">
+						<?php if(empty($detail->qrcode)):?>
+                        <?php else:?>
+						<img src="<?php echo base_url();?>img/qrcode/<?php echo $detail->qrcode?>" width="400">
+						<?php endif;?>
 					</div>
 				</div>
 
