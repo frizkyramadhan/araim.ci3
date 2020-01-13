@@ -1,5 +1,6 @@
 {
     "require": {
-        "endroid/qr-code": "^3.7"
+        "endroid/qr-code": "^3.7",
+        "dompdf/dompdf": "^0.8.3"
     }
 }
