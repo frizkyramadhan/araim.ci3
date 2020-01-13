@@ -5,12 +5,12 @@ class Fungsi
         $this->ci =& get_instance();
     }
 
-    function PdfGenerator($html, $filename){
+    function PdfGenerator($html, $filename, $paper, $orientation){
         // instantiate and use the dompdf class
         $dompdf = new Dompdf\Dompdf();
-        $dompdf->loadHtml('$html');
+        $dompdf->loadHtml($html);
         // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->setPaper($paper, $orientation);
         // Render the HTML as PDF
         $dompdf->render();
         // Output the generated PDF to Browser

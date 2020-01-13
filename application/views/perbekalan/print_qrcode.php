@@ -7,8 +7,10 @@
     <title><?php echo $title;?></title>
 </head>
 <body>
-    <pre>
-        <?php echo print_r($qrcode);?>
-    </pre>
+    <?php foreach ($qrcode as $row):?>
+        <!-- <img src="img/qrcode/<?php echo $row->qrcode?>" style="width:120px"> -->
+        
+        <img src="<?php echo base_url();?>img/qrcode/<?php echo $row->qrcode?>" width="100">
+    <?php endforeach;?>
 </body>
 </html>

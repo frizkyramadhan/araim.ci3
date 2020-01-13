@@ -361,11 +361,12 @@ class Perbekalan extends CI_Controller {
         redirect('perbekalan/detail/'.$nik);
     }
 
-    function print_qrcode(){
-        // $data['title'] = 'QR Code Inventory Data';
-        // $data['qrcode'] = $this->perbekalan_m->getQrcode($nik);
-        // $this->load->view('perbekalan/print_qrcode', $data);
-        $this->fungsi->PdfGenerator('coba', 'coba');
+    function print_qrcode($nik){
+        $data['title'] = 'QR Code Inventory Data';
+        $data['qrcode'] = $this->perbekalan_m->getQrcode($nik);
+        $this->load->view('perbekalan/print_qrcode', $data);
+        // $html = $this->load->view('perbekalan/print_qrcode', $data, true);
+        // $this->fungsi->PdfGenerator($html, 'QR-Code', 'A4', 'Landscape');
     }
 }
 
