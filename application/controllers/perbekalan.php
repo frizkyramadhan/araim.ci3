@@ -336,7 +336,7 @@ class Perbekalan extends CI_Controller {
         $isi_teks .= "Model = ".$perbekalan->model."\n";
         $isi_teks .= "Spesifikasi = ".$perbekalan->spesifikasi."\n";
         $isi_teks .= "Lokasi = ".$perbekalan->lokasi."\n";
-        $isi_teks .= "Keterangan = ".$perbekalan->remarks."\n";
+        //$isi_teks .= "Keterangan = ".$perbekalan->remarks."\n";
         // $qrCode = new Endroid\QrCode\QrCode('No. Inventori = '.$perbekalan->no_inv.'');
         $qrCode = new Endroid\QrCode\QrCode($isi_teks);
         $qrCode->writeFile('img/qrcode/qr-'.$perbekalan->id_perbekalan.'.png');
