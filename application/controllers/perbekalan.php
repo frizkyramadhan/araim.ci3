@@ -361,5 +361,13 @@ class Perbekalan extends CI_Controller {
         // $html = $this->load->view('perbekalan/print_qrcode', $data, true);
         // $this->fungsi->PdfGenerator($html, 'QR-Code', 'A4', 'Landscape');
     }
+
+    function print_qrcode_id($id){
+        $data['title'] = 'QR Code Inventory Data';
+        $data['qrcode'] = $this->perbekalan_m->detail_aset($id);
+        $this->load->view('perbekalan/print_qrcode_id', $data);
+        // $html = $this->load->view('perbekalan/print_qrcode', $data, true);
+        // $this->fungsi->PdfGenerator($html, 'QR-Code', 'A4', 'Landscape');
+    }
 }
 ?>

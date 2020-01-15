@@ -17,25 +17,23 @@
     </style>
 </head>
 <body>
-<?php print_r($this->db->last_query());?>
-<pre><?php echo print_r($qrcode);?></pre>
-    <?php foreach ($qrcode as $row):?>
+<!-- <?php print_r($this->db->last_query());?>
+<pre><?php echo print_r($qrcode);?></pre> -->
         <table width="320" border="1" cellspacing="0" cellpadding="3">
             <tr>
-                <td width="120" rowspan="4"><div align="center"><img src="<?php echo base_url();?>img/qrcode/<?php echo $row->qrcode?>" width="120"></div></td>
+                <td width="120" rowspan="4"><div align="center"><img src="<?php echo base_url();?>img/qrcode/<?php echo $qrcode->qrcode?>" width="120"></div></td>
                 <td width="182"><div align="center"><img src="<?php echo base_url();?>img/logo-bw.jpg" width="100"></div></td>
             </tr>
             <tr>
-                <td><?php echo $row->no_inv;?></td>
+                <td><?php echo $qrcode->no_inv;?></td>
             </tr>
             <tr>
-                <td><?php echo $row->nama_aset; echo " "; echo $row->merk; echo " "; echo $row->model?></td>
+                <td><?php echo $qrcode->nama_aset; echo " "; echo $qrcode->merk; echo " "; echo $qrcode->model?></td>
             </tr>
             <tr>
-                <td height="26"><?php echo $row->nik; echo " - "; echo $row->nama;?></td>
+                <td height="26"><?php echo $qrcode->nik; echo " - "; echo $qrcode->nama;?></td>
             </tr>
         </table>
         <br>       
-    <?php endforeach;?>
 </body>
 </html>

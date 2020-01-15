@@ -149,6 +149,8 @@
 						<?php if(empty($detail->qrcode)):?>
                         <?php else:?>
 						<img src="<?php echo base_url();?>img/qrcode/<?php echo $detail->qrcode?>" width="400">
+						<br>
+						<?php echo anchor('perbekalan/print_qrcode_id/'.$detail->id_perbekalan, '<i class="halflings-icon white qrcode"></i> Print', array('class'=>'btn btn-success', 'target'=>'blank'));?>
 						<?php endif;?>
 					</div>
 				</div>
