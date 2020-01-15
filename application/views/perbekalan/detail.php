@@ -78,7 +78,10 @@
                                                     <div class="control-group">
                                                     <div align="center"><label><b>Existing Assets</b></label></div>
 													<?php if ($pengguna->level != "Read Only"):?>
-                                                    <div align="right"><?php echo anchor('perbekalan/add/'.$data_pengguna->nik, '&nbsp Add &nbsp', array('class'=>'btn btn-primary'));?></div>
+                                                    <div align="right">
+                                                        <?php echo anchor('perbekalan/print_qrcode/'.$data_pengguna->nik, '<i class="halflings-icon white qrcode"></i> Print', array('class'=>'btn btn-success', 'target'=>'blank'));?>
+                                                        <?php echo anchor('perbekalan/add/'.$data_pengguna->nik, '&nbsp Add &nbsp', array('class'=>'btn btn-primary'));?>
+                                                    </div>
                                                     <?php endif;?>
 													<br>
                                                     <?php // echo form_open('perbekalan');?>
