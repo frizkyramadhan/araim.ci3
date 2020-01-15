@@ -320,13 +320,6 @@ class Perbekalan extends CI_Controller {
         return array('Inventory No.','Asset','Merk','Model','Date','PIC','Project');
     }
 
-    function coba_qrcode(){
-        $qrCode = new Endroid\QrCode\QrCode('Life is too short to be generating QR codes');
-
-        header('Content-Type: '.$qrCode->getContentType());
-        echo $qrCode->writeString();
-    }
-
     function qrcode($nik, $id){
         $perbekalan = $this->perbekalan_m->detail_aset($id);
         //var_dump($perbekalan);
@@ -355,9 +348,9 @@ class Perbekalan extends CI_Controller {
 
         unlink("./img/qrcode/$row->qrcode");
 
-        $data = array ('id_perbekalan' => $id, 'qrcode' => "");
+        //$data = array ('id_perbekalan' => $id, 'qrcode' => "");
         $this->db->where('id_perbekalan', $id);
-        $this->db->update('perbekalan', $data);
+        $this->db->update('perbekalan', array('qrcode' => NULL));
         redirect('perbekalan/detail/'.$nik);
     }
 

@@ -207,7 +207,7 @@ class Perbekalan_m extends CI_Model {
     }
 
     function getQrcode($nik) {
-        $where = 'perbekalan.qrcode IS NOT NULL';
+        $where = 'qrcode IS NOT NULL';
         $this->db->select('*');
         $this->db->from('perbekalan');
         $this->db->from('aset');
