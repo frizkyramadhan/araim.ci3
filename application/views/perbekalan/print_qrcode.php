@@ -17,8 +17,8 @@
     </style>
 </head>
 <body>
-<?php print_r($this->db->last_query());?>
-<pre><?php echo print_r($qrcode);?></pre>
+<!-- <?php print_r($this->db->last_query());?>
+<pre><?php echo print_r($qrcode);?></pre> -->
     <?php foreach ($qrcode as $row):?>
         <table width="320" border="1" cellspacing="0" cellpadding="3">
             <tr>
