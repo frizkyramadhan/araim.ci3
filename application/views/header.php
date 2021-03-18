@@ -68,10 +68,7 @@
 	<script src="<?php echo base_url() ?>js/counter.js"></script>
 	<script src="<?php echo base_url() ?>js/retina.js"></script>
 	<script src="<?php echo base_url() ?>js/custom.js"></script>
-	<!-- <script src="<?php echo base_url() ?>js/script.js"></script> -->
-
-
-
+	<script src="<?php echo base_url() ?>js/script.js"></script>
 </head>
 
 <body>
