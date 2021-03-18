@@ -1,50 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	
+
 	<!-- start: Meta -->
 	<meta charset="utf-8">
-	<title><?php echo $title;?> - Arkananta Asset Inventory Management</title>
+	<title><?php echo $title; ?> - Arkananta Asset Inventory Management</title>
 	<meta name="description" content="Arkananta Asset Inventory Management">
 	<meta name="author" content="Frizky Ramadhan">
 	<meta name="keyword" content="Arkananta, asset inventory, asset tracking">
 	<!-- end: Meta -->
-	
+
 	<!-- start: Mobile Specific -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- end: Mobile Specific -->
-	
+
 	<!-- start: CSS -->
-        <link id="bootstrap-style" href="<?php echo base_url();?>css/bootstrap.min.css" rel="stylesheet">
-	<link href="<?php echo base_url();?>css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link id="base-style" href="<?php echo base_url();?>css/style.css" rel="stylesheet">
-	<link id="base-style-responsive" href="<?php echo base_url();?>css/style-responsive.css" rel="stylesheet">
-        <link href='<?php echo base_url();?>css/fontgoogle.css' rel='stylesheet' type='text/css'>
+	<link id="bootstrap-style" href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link id="base-style" href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
+	<link id="base-style-responsive" href="<?php echo base_url(); ?>css/style-responsive.css" rel="stylesheet">
+	<link href='<?php echo base_url(); ?>css/fontgoogle.css' rel='stylesheet' type='text/css'>
 	<!-- end: CSS -->
-	
+
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<link id="ie-style" href="css/ie.css" rel="stylesheet">
 	<![endif]-->
-	
+
 	<!--[if IE 9]>
 		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
 	<![endif]-->
-		
+
 	<!-- start: Favicon -->
-	<link rel="shortcut icon" href="<?php echo base_url();?>img/favicon.ico">
+	<link rel="shortcut icon" href="<?php echo base_url(); ?>img/favicon.ico">
 	<!-- end: Favicon -->
-	
-		
-	
-        
-		
+
+	<script src="<?php echo base_url() ?>js/jquery-1.9.1.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery-migrate-1.0.0.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery-ui-1.10.0.custom.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.ui.touch-punch.js"></script>
+	<script src="<?php echo base_url() ?>js/modernizr.js"></script>
+	<script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.cookie.js"></script>
+	<script src='<?php echo base_url() ?>js/fullcalendar.min.js'></script>
+	<script src='<?php echo base_url() ?>js/jquery.dataTables.min.js'></script>
+	<script src="<?php echo base_url() ?>js/excanvas.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.flot.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.flot.pie.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.flot.stack.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.flot.resize.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.chosen.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.uniform.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.cleditor.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.noty.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.elfinder.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.raty.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.iphone.toggle.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.uploadify-3.1.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.gritter.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.imagesloaded.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.masonry.min.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.knob.modified.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.sparkline.min.js"></script>
+	<script src="<?php echo base_url() ?>js/counter.js"></script>
+	<script src="<?php echo base_url() ?>js/retina.js"></script>
+	<script src="<?php echo base_url() ?>js/custom.js"></script>
+	<!-- <script src="<?php echo base_url() ?>js/script.js"></script> -->
+
+
+
 </head>
 
 <body>
-		<!-- start: Header -->
+	<!-- start: Header -->
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container-fluid">
@@ -53,12 +84,12 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-                            <a class="brand" href="<?php echo base_url();?>"><img src="<?php echo base_url();?>img/logo1.png" width="120" height="50"/></a>
-								
+				<a class="brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>img/logo1.png" width="120" height="50" /></a>
+
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
-<!--						<li class="dropdown hidden-phone">
+						<!--						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="icon-bell"></i>
 								<span class="badge red">
@@ -145,7 +176,7 @@
 							</ul>
 						</li>-->
 						<!-- start: Notifications Dropdown -->
-<!--						<li class="dropdown hidden-phone">
+						<!--						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="icon-calendar"></i>
 								<span class="badge red">
@@ -208,7 +239,7 @@
 						</li>-->
 						<!-- end: Notifications Dropdown -->
 						<!-- start: Message Dropdown -->
-<!--						<li class="dropdown hidden-phone">
+						<!--						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="icon-envelope"></i>
 								<span class="badge red">
@@ -304,34 +335,34 @@
 								</li>	
 							</ul>
 						</li>-->
-						
+
 						<!-- start: User Dropdown -->
 						<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white user"></i>
-                                                                <?php
-                                                                $nik = $this->session->userdata('nik');
-                                                                $pengguna = $this->login_m->dataPengguna($nik);
-                                                                echo $pengguna->nama;?>
+								<?php
+								$nik = $this->session->userdata('nik');
+								$pengguna = $this->login_m->dataPengguna($nik);
+								echo $pengguna->nama; ?>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
 								<li class="dropdown-menu-title">
- 									<span>Account Settings</span>
+									<span>Account Settings</span>
 								</li>
 								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-								<li><a href="<?php echo base_url();?>login/logout"><i class="halflings-icon off"></i> Logout</a></li>
+								<li><a href="<?php echo base_url(); ?>login/logout"><i class="halflings-icon off"></i> Logout</a></li>
 							</ul>
 						</li>
 						<!-- end: User Dropdown -->
 					</ul>
 				</div>
 				<!-- end: Header Menu -->
-				
+
 			</div>
 		</div>
 	</div>
 	<!-- start: Header -->
-	
-		<div class="container-fluid-full">
+
+	<div class="container-fluid-full">
 		<div class="row-fluid">
