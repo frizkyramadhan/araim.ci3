@@ -171,25 +171,25 @@ class Perbekalan extends CI_Controller
         $this->load->view('header', $data);
         $this->load->view('nav');
 
-        $check = $this->input->post('check', true);
-        if ($check != '') {
-            $checked = implode('/', $check);
-        }
+        // $check = $this->input->post('check', true);
+        // if ($check != '') {
+        //     $checked = implode('/', $check);
+        // }
         $input = $this->session->userdata('nik');
         $pengguna = $this->login_m->dataPengguna($input);
-        if ($_POST == NULL) {
-            if ($pengguna->level == "User") {
-                $data['detail'] = $this->perbekalan_m->getDataDetailByDept($nik);
-            } else {
-                $data['detail'] = $this->perbekalan_m->getDataDetail($nik);
-            }
-
-            $data['nik'] = $nik;
-            $this->load->view('perbekalan/detail', $data);
-            $this->load->view('footer');
+        // if ($_POST == NULL) {
+        if ($pengguna->level == "User") {
+            $data['detail'] = $this->perbekalan_m->getDataDetailByDept($nik);
         } else {
-            redirect('perbekalan/print_form/' . $checked);
+            $data['detail'] = $this->perbekalan_m->getDataDetail($nik);
         }
+
+        $data['nik'] = $nik;
+        $this->load->view('perbekalan/detail', $data);
+        $this->load->view('footer');
+        // } else {
+        //     redirect('perbekalan/print_form/' . $checked);
+        // }
     }
 
     function detail_aset($id)
@@ -295,11 +295,11 @@ class Perbekalan extends CI_Controller
         }
     }
 
-    function print_form()
-    {
-        $data['lists'] = $this->perbekalan_m->getCheckedList();
-        $this->load->view('perbekalan/print_form', $data);
-    }
+    // function print_form()
+    // {
+    //     $data['lists'] = $this->perbekalan_m->getCheckedList();
+    //     $this->load->view('perbekalan/print_form', $data);
+    // }
 
     // function execute(){
     // $perbekalan = $this->db->query('select * from perbekalan')->result();
