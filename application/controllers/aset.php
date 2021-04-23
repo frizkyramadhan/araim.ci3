@@ -74,5 +74,3 @@ class Aset extends CI_Controller{
         
     }
 }
-
-?>

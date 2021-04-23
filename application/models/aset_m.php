@@ -34,4 +34,3 @@ class Aset_m extends CI_Model {
     }
 
 }
-?>

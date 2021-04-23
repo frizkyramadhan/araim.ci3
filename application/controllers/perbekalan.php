@@ -48,7 +48,7 @@ class Perbekalan extends CI_Controller
         $this->load->view('nav');
 
         //penentuan dropdown aset
-        $dbres_aset = $this->db->query('select * from aset, kategori where aset.id_kategori = kategori.id_kategori order by nama_kategori asc');
+        $dbres_aset = $this->db->query('select * from aset, kategori where aset.id_kategori = kategori.id_kategori order by nama_aset asc');
         $ddmenu_aset = array();
         foreach ($dbres_aset->result_array() as $tablerow) {
             $ddmenu_aset[$tablerow['id_aset']] = $tablerow['nama_aset'] . " - " . $tablerow['nama_kategori'];
@@ -115,7 +115,7 @@ class Perbekalan extends CI_Controller
         $this->load->view('header', $data);
         $this->load->view('nav');
 
-        $dbres_aset = $this->db->query('select * from aset, kategori where aset.id_kategori = kategori.id_kategori order by nama_kategori asc');
+        $dbres_aset = $this->db->query('select * from aset, kategori where aset.id_kategori = kategori.id_kategori order by nama_aset asc');
         $ddmenu_aset = array();
         foreach ($dbres_aset->result_array() as $tablerow) {
             $ddmenu_aset[$tablerow['id_aset']] = $tablerow['nama_aset'] . " - " . $tablerow['nama_kategori'];
