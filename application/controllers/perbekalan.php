@@ -200,6 +200,7 @@ class Perbekalan extends CI_Controller
         $this->load->view('nav');
         if ($_POST == NULL) {
             $data['detail'] = $this->perbekalan_m->detail_aset($id);
+            $data['spec'] = $this->perbekalan_m->getSpecById($id);
             $this->load->view('perbekalan/detail_aset', $data);
             $this->load->view('footer');
         } else {
@@ -385,5 +386,67 @@ class Perbekalan extends CI_Controller
         $this->load->view('perbekalan/print_qrcode_id', $data);
         // $html = $this->load->view('perbekalan/print_qrcode', $data, true);
         // $this->fungsi->PdfGenerator($html, 'QR-Code', 'A4', 'Landscape');
+    }
+
+    function add_spec($id)
+    {
+        $data['title'] = "Add Specification Asset";
+        $data['subtitle'] = "Specification Asset";
+        $this->load->view('header', $data);
+        $this->load->view('nav');
+
+        //penentuan dropdown komponen
+        $dbres_comp = $this->db->query('select * from komponen where is_active = "1" order by komponen asc');
+        $ddmenu_comp = array();
+        foreach ($dbres_comp->result_array() as $tablerow) {
+            $ddmenu_comp[$tablerow['id_komponen']] = $tablerow['komponen'];
+        }
+        $data['comp_options'] = $ddmenu_comp;
+        $data['id_perbekalan'] = $id;
+
+        $this->form_validation->set_rules("spesifikasi", 'Specification', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('perbekalan/add_spec', $data);
+            $this->load->view('footer');
+        } else {
+            $this->perbekalan_m->insert_spec($id);
+            redirect('perbekalan/detail_aset/' . $id);
+        }
+    }
+
+    function edit_spec($id_perbekalan, $id)
+    {
+        $data['title'] = "Edit Specification Asset";
+        $data['subtitle'] = "Specification Asset";
+        $this->load->view('header', $data);
+        $this->load->view('nav');
+
+        //penentuan dropdown komponen
+        $dbres_comp = $this->db->query('select * from komponen where is_active = "1" order by komponen asc');
+        $ddmenu_comp = array();
+        foreach ($dbres_comp->result_array() as $tablerow) {
+            $ddmenu_comp[$tablerow['id_komponen']] = $tablerow['komponen'];
+        }
+        $data['comp_options'] = $ddmenu_comp;
+        $data['id_perbekalan'] = $id_perbekalan;
+
+        $this->form_validation->set_rules("spesifikasi", 'Specification', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $data['select_komp'] = $this->perbekalan_m->select_komp($id);
+            $data['spesifikasi'] = $this->perbekalan_m->select_spec($id);
+            $this->load->view('perbekalan/edit_spec', $data);
+            $this->load->view('footer');
+        } else {
+            $this->perbekalan_m->update_spec($id);
+            redirect('perbekalan/detail_aset/' . $id_perbekalan);
+        }
+    }
+
+    public function delete_spec($id_perbekalan, $id)
+    {
+        $this->perbekalan_m->delete_spesifikasi($id);
+        redirect('perbekalan/detail_aset/' . $id_perbekalan);
     }
 }

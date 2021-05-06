@@ -2,7 +2,6 @@
 
 class Perbekalan_m extends CI_Model
 {
-
     function insert($set)
     {
         $this->db->insert('perbekalan', $set);
@@ -11,6 +10,11 @@ class Perbekalan_m extends CI_Model
     function update($id)
     {
         $this->db->where('id_perbekalan', $id)->update('perbekalan', $_POST);
+    }
+
+    function update_spec($id)
+    {
+        $this->db->where('id_spesifikasi', $id)->update('spesifikasi', $_POST);
     }
 
     function export()
@@ -54,6 +58,16 @@ class Perbekalan_m extends CI_Model
         return $id;
     }
 
+    function select_komp($id)
+    {
+        $this->db->select('spesifikasi.id_komponen');
+        $this->db->from('spesifikasi, komponen');
+        $this->db->where('spesifikasi.id_komponen = komponen.id_komponen');
+        $this->db->where(array('id_spesifikasi' => $id));
+        $id = $this->db->get()->row_array();
+        return $id;
+    }
+
     function detail_aset($id)
     {
         $this->db->select('*');
@@ -79,6 +93,11 @@ class Perbekalan_m extends CI_Model
     function select($id)
     {
         return $this->db->get_where('perbekalan', array('id_perbekalan' => $id))->row();
+    }
+
+    function select_spec($id)
+    {
+        return $this->db->get_where('spesifikasi', array('id_spesifikasi' => $id))->row();
     }
 
     function getAllPerbekalan()
@@ -274,6 +293,45 @@ class Perbekalan_m extends CI_Model
         return $no_inv;
     }
 
+    function deletePerbekalan($nik)
+    {
+        $this->db->query("delete pb from perbekalan pb inner join karyawan k on pb.id_karyawan = k.id_karyawan where k.nik = " . $nik);
+    }
+
+    function delete($id)
+    {
+        $this->db->where('id_perbekalan', $id);
+        $this->db->delete('perbekalan');
+    }
+
+    function delete_spesifikasi($id)
+    {
+        $this->db->where('id_spesifikasi', $id);
+        $this->db->delete('spesifikasi');
+    }
+
+    function insert_spec($id)
+    {
+        $data = array(
+            'id_perbekalan' => $id,
+            'id_komponen' => $this->input->post('id_komponen'),
+            'spesifikasi' => $this->input->post('spesifikasi'),
+            'is_active' => $this->input->post('is_active')
+        );
+        $this->db->insert('spesifikasi', $data);
+    }
+
+    function getSpecById($id)
+    {
+        $this->db->select('id_spesifikasi, komponen.komponen, spesifikasi.spesifikasi, spesifikasi.is_active');
+        $this->db->from('spesifikasi');
+        $this->db->join('komponen', 'spesifikasi.id_komponen = komponen.id_komponen', 'left');
+        $this->db->join('perbekalan', 'spesifikasi.id_perbekalan = perbekalan.id_perbekalan', 'left');
+        $this->db->where(array('perbekalan.id_perbekalan' => $id));
+        $id = $this->db->get()->result();
+        return $id;
+    }
+
     //	function getAllPerbekalan(){
     //		return $this->db->query("SELECT b.`id_perbekalan`,a.`nik`,a.`nama`,c.`nama_aset`,`jumlah`,`remarks`,`tanggal` 
     //                    FROM karyawan a JOIN perbekalan b ON a.`id_karyawan`=b.`id_karyawan`
@@ -301,16 +359,6 @@ class Perbekalan_m extends CI_Model
     //                            AND karyawan.nik ='.$nik)->result_array();
     //        }
 
-    function deletePerbekalan($nik)
-    {
-        $this->db->query("delete pb from perbekalan pb inner join karyawan k on pb.id_karyawan = k.id_karyawan where k.nik = " . $nik);
-    }
-
-    function delete($id)
-    {
-        $this->db->where('id_perbekalan', $id);
-        $this->db->delete('perbekalan');
-    }
 
     //	function getPerbekalanById($id){
     //		return $this->db->query("SELECT * FROM perbekalan WHERE `id_perbekalan` = ".$id)->result_array();
