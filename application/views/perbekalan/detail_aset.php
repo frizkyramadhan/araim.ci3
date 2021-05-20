@@ -1,7 +1,5 @@
     <!-- start: Content -->
     <div id="content" class="span10">
-
-
     	<ul class="breadcrumb">
     		<li>
     			<i class="icon-home"></i>
@@ -20,7 +18,7 @@
     	</ul>
     	<!-- <pre><?php echo print_r($detail) ?></pre> -->
     	<div class="row-fluid sortable">
-    		<div class="box span7">
+    		<div class="box span12">
     			<div class="box-header" data-original-title>
     				<h2><i class="halflings-icon white edit"></i><span class="break"></span><?php echo $subtitle; ?></h2>
     				<div class="box-icon">
@@ -109,12 +107,12 @@
     								<input type="text" class="span6" value="<?php echo $detail->lokasi; ?>" disabled />
     							</div>
     						</div>
-    						<div class="control-group">
+    						<!-- <div class="control-group">
     							<label class="control-label">Specification</label>
     							<div class="controls">
     								<textarea class="span8" rows="3" disabled><?php echo $detail->spesifikasi; ?></textarea>
     							</div>
-    						</div>
+    						</div> -->
     						<div class="control-group">
     							<label class="control-label">Remark</label>
     							<div class="controls">
@@ -136,8 +134,10 @@
     				</form>
     			</div>
     		</div>
+    	</div>
+    	<div class="row-fluid sortable">
     		<!--/span-->
-    		<div class="box span4">
+    		<div class="box span12">
     			<div class="box-header" data-original-title>
     				<h2><i class="halflings-icon white cog"></i><span class="break"></span>Specification</h2>
     				<div class="box-icon">
@@ -149,72 +149,83 @@
     				</div>
     			</div>
     			<div class="box-content">
-    				<table class="table table-condensed" width=100%>
-    					<thead>
-    						<tr>
-    							<th>No</th>
-    							<th>Component</th>
-    							<th>Description</th>
-    							<th>Status</th>
-    							<th style="width: 25%;">Act</th>
-    						</tr>
-    					</thead>
-    					<tbody>
-    						<tr>
-    							<?php $i = 1; ?>
-    							<?php if (empty($spec)) : ?>
-    								<td colspan="5" style="text-align: center;">No Data Available</td>
-    							<?php else : ?>
+    				<form role="form" action="" method="post">
+    					<input name="id_perbekalan" type="hidden" value="<?php echo $detail->id_perbekalan; ?>" class="medium">
+    					<table class="table table-condensed" width=100%>
+    						<thead>
+    							<tr>
+    								<th>Component</th>
+    								<th>Description</th>
+    								<th>Remarks</th>
+    								<?php if ($pengguna->level != "Read Only") : ?>
+    									<th style="text-align: center;">Action</th>
+    								<?php endif; ?>
+    							</tr>
+    						</thead>
+    						<tbody>
+    							<tr>
     								<?php foreach ($spec as $row) : ?>
-    									<td><?php echo $i++; ?></td>
-    									<td><?php echo anchor('perbekalan/edit_spec/' . $detail->id_perbekalan . '/' . $row->id_spesifikasi, $row->komponen) ?>
+    									<td><?php echo $row->komponen; ?>
     									<td><?php echo $row->spesifikasi; ?></td>
-    									<td>
-    										<?php if ($row->is_active == 1) {
-												echo '<span class="label label-success">Active</span>';
-											} else {
-												echo '<span class="label label-important">Inactive</span>';
-											} ?>
-    									</td>
-    									<td>
-    										<?php echo anchor('perbekalan/delete_spec/' . $detail->id_perbekalan . '/' . $row->id_spesifikasi, '<i class="icon-trash"></i>', array('class' => 'btn btn-mini btn-danger', 'onclick' => "return confirm('Are you sure to delete this specification?')")) ?>
-    									</td>
+    									<td><?php echo $row->keterangan; ?></td>
+    									<?php if ($pengguna->level != "Read Only") : ?>
+    										<td style="text-align: center;">
+    											<?php echo anchor('perbekalan/edit_spec/' . $detail->id_perbekalan . '/' . $row->id_spesifikasi, '&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;', array('class' => 'btn btn-small btn-warning')) ?>
+    											<?php echo anchor('perbekalan/delete_spec/' . $detail->id_perbekalan . '/' . $row->id_spesifikasi, 'Delete', array('class' => 'btn btn-small btn-danger', 'onclick' => "return confirm('Are you sure to delete this specification?')")) ?>
+    										</td>
+    									<?php endif; ?>
+    							</tr>
+    						<?php endforeach; ?>
+    						<tr id="last">
+    							<td></td>
+    							<td></td>
+    							<td></td>
+    							<?php if ($pengguna->level != "Read Only") : ?>
+    								<td style="text-align: center;">
+    									<button type="button" class="btn btn-small btn-success" id="addRow">+ Add</button>
+    								</td>
+    							<?php endif; ?>
     						</tr>
-    					<?php endforeach; ?>
-    				<?php endif; ?>
-    					</tbody>
-    				</table>
+    						</tbody>
+    					</table>
+    					<?php if ($pengguna->level != "Read Only") : ?>
+    						<div class="form-actions">
+    							<button type="submit" class="btn btn-orange">Submit</button>
+    							<button type="reset" class="btn btn-grey">Reset</button>
+    						</div>
+    					<?php endif; ?>
+    				</form>
     			</div>
     		</div>
-
-    		<div class=" box span4">
-    			<div class="box-header" data-original-title>
-    				<h2><i class="halflings-icon white qrcode"></i><span class="break"></span>QR Code</h2>
-    				<div class="box-icon">
-    					<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
-    					<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+    		<div class="row-fluid sortable">
+    			<div class=" box span5">
+    				<div class="box-header" data-original-title>
+    					<h2><i class="halflings-icon white qrcode"></i><span class="break"></span>QR Code</h2>
+    					<div class="box-icon">
+    						<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+    						<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+    					</div>
+    				</div>
+    				<div class="box-content" align="center">
+    					<?php if (empty($detail->qrcode)) : ?>
+    					<?php else : ?>
+    						<img src="<?php echo base_url(); ?>img/qrcode/<?php echo $detail->qrcode ?>" width="400">
+    						<br>
+    						<?php echo anchor('perbekalan/print_qrcode_id/' . $detail->id_perbekalan, '<i class="halflings-icon white qrcode"></i> Print', array('class' => 'btn btn-success', 'target' => 'blank')); ?>
+    					<?php endif; ?>
     				</div>
     			</div>
-    			<div class="box-content" align="center">
-    				<?php if (empty($detail->qrcode)) : ?>
-    				<?php else : ?>
-    					<img src="<?php echo base_url(); ?>img/qrcode/<?php echo $detail->qrcode ?>" width="400">
-    					<br>
-    					<?php echo anchor('perbekalan/print_qrcode_id/' . $detail->id_perbekalan, '<i class="halflings-icon white qrcode"></i> Print', array('class' => 'btn btn-success', 'target' => 'blank')); ?>
-    				<?php endif; ?>
-    			</div>
-    		</div>
+    			<div class="box span6">
+    				<div class="box-header" data-original-title>
+    					<h2><i class="halflings-icon white tags"></i><span class="break"></span>Repair History</h2>
+    					<div class="box-icon">
 
-    		<div class="box span4">
-    			<div class="box-header" data-original-title>
-    				<h2><i class="halflings-icon white tags"></i><span class="break"></span>Repair History</h2>
-    				<div class="box-icon">
-
-    					<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
-    					<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+    						<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+    						<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+    					</div>
     				</div>
-    			</div>
-    			<div class="box-content" id="repair-history">
+    				<div class="box-content" id="repair-history">
+    				</div>
     			</div>
     		</div>
     	</div>
@@ -236,7 +247,61 @@
     	</div>
     </div>
     <!--/.fluid-container-->
-
+    <script type="text/javascript">
+    	// var count = 0;
+    	// $(function() {
+    	// 	$("#addRow").click(function() {
+    	// 		row = `
+    	// 		<tr>
+    	// 		<td>
+    	// 		<?php
+					// 		$conn = mysqli_connect('localhost', 'root', '@rk@*', 'esis');
+					// 		$sql = mysqli_query($conn, 'select * from komponen order by komponen asc');
+					// 		if (mysqli_num_rows($sql)) {
+					// 			$select = "<select name=id_komponen[] style=width:100%>";
+					// 			while ($rs = mysqli_fetch_array($sql)) {
+					// 				$select .= '<option value="' . $rs["id_komponen"] . '">' . $rs["komponen"] . '</option>';
+					// 			}
+					// 		}
+					// 		$select .= '</select>';
+					// 		echo $select;
+					// 		
+					?>
+    	// 		</td>
+    	//         <td><input name="spesifikasi_` + count + `" type="text" style="height:24px; width: 100%"></td>
+    	//         <td><input name="keterangan_` + count + `" type="text" style="height:24px; width: 100%"></td>
+    	//         <td><button type="button" class="del btn btn-small btn-danger">Delete</button></td>
+    	//         </tr>`;
+    	// 		$(row).insertBefore("#last");
+    	// 	});
+    	// });
+    	var count = 0;
+    	$(function() {
+    		$("#addRow").click(function() {
+    			count += 1;
+    			row = `<tr>
+    				<input id="id_perbekalan_` + count + `" name="id_perbekalan_` + count + `" type="hidden" style="width: 95%" value="" readonly="TRUE"><input id="rows_` + count + `" name="rows[]" value="` + count + `" type="hidden">
+    				<td style="padding: 5px">
+    				<select name="id_komponen_` + count + `" style="width:100%">
+    				<option value = "" > --Choose Component-- </option>
+    			<?php
+				foreach ($komponen as $data) {
+					echo "<option value='" . $data->id_komponen . "'>" . $data->komponen . "</option>";
+				}
+				?>
+    				</select></td >
+    				<td style="padding: 5px"><input id="spesifikasi_` + count + `" name="spesifikasi_` + count + `" type="text" style="width: 97%"></td>
+    				<td style="padding: 5px"><input id="keterangan_` + count + `" name="keterangan_` + count + `" type="text" style="width: 80%"></td>
+    				<td style="text-align:center; padding: 5px"><button type="button" class="del btn btn-small btn-danger">Delete</button></td>
+    				</tr>`;
+    			$(row).insertBefore("#last");
+    			i++;
+    		});
+    	});
+    	$("body").on('click', '.del', function() {
+    		$(this).parent().parent().remove();
+    	});
+    </script>
     <script>
     	$(document).ready(function() {
     		$('#repair-history').html('');

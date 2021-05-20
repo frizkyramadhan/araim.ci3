@@ -46,12 +46,10 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">Status</label>
+                            <label class="control-label">Remarks</label>
                             <div class="controls">
-                                <select class="span6" data-rel="chosen" name="is_active">
-                                    <option value="1">Active</option>
-                                    <option value="0">Not Active</option>
-                                </select>
+                                <input type="text" class="span6" name="keterangan" placeholder="Remarks" value="<?php echo set_value("keterangan"); ?>" />
+                                <span style="color: red"><?php echo form_error("keterangan"); ?></span>
                             </div>
                         </div>
                         <div class="form-actions">

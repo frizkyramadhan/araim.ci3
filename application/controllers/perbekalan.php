@@ -10,6 +10,7 @@ class Perbekalan extends CI_Controller
             redirect('login/process_login');
         } else {
             $this->load->model('perbekalan_m');
+            $this->load->model('komponen_m');
             $this->load->model('karyawan_m');
             $this->load->model('aset_m');
             $this->load->model('login_m');
@@ -201,10 +202,29 @@ class Perbekalan extends CI_Controller
         if ($_POST == NULL) {
             $data['detail'] = $this->perbekalan_m->detail_aset($id);
             $data['spec'] = $this->perbekalan_m->getSpecById($id);
+            $data['komponen'] = $this->komponen_m->selectAll();
             $this->load->view('perbekalan/detail_aset', $data);
             $this->load->view('footer');
         } else {
-            redirect('perbekalan');
+            // foreach (array_combine($this->input->post('id_komponen'), $this->input->post('spesifikasi')) as $komp => $spek) {
+            //     $detail = array(
+            //         'id_perbekalan' => $this->input->post('id_perbekalan'),
+            //         'id_komponen' => $komp,
+            //         'spesifikasi' => $spek,
+            //         'is_active' => '1'
+            //     );
+            //     $this->db->insert('spesifikasi', $detail);
+            // }
+            $id_perbekalan = $this->input->post('id_perbekalan');
+            foreach ($_POST['rows'] as $key => $count) {
+                $id_komponen = $_POST['id_komponen_' . $count];
+                $spesifikasi = $_POST['spesifikasi_' . $count];
+                $keterangan = $_POST['keterangan_' . $count];
+
+                $query_2 = "INSERT INTO spesifikasi (id_perbekalan,id_komponen,spesifikasi,keterangan) VALUES ('$id_perbekalan','$id_komponen','$spesifikasi','$keterangan')";
+                $this->db->query($query_2);
+            }
+            redirect('perbekalan/detail_aset/' . $id);
         }
     }
 
@@ -405,6 +425,7 @@ class Perbekalan extends CI_Controller
         $data['id_perbekalan'] = $id;
 
         $this->form_validation->set_rules("spesifikasi", 'Specification', 'required');
+        $this->form_validation->set_rules("keterangan", 'Remarks', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('perbekalan/add_spec', $data);
@@ -432,6 +453,7 @@ class Perbekalan extends CI_Controller
         $data['id_perbekalan'] = $id_perbekalan;
 
         $this->form_validation->set_rules("spesifikasi", 'Specification', 'required');
+        $this->form_validation->set_rules("keterangan", 'Remarks', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $data['select_komp'] = $this->perbekalan_m->select_komp($id);

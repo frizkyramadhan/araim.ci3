@@ -48,10 +48,8 @@
                         <div class="control-group">
                             <label class="control-label">Status</label>
                             <div class="controls">
-                                <select class="span6" data-rel="chosen" name="is_active">
-                                    <option value="1" <?= $spesifikasi->is_active == '1' ? ' selected="selected"' : ''; ?>>Active</option>
-                                    <option value="0" <?= $spesifikasi->is_active == '0' ? ' selected="selected"' : ''; ?>>Not Active</option>
-                                </select>
+                                <input type="text" class="span6" name="keterangan" placeholder="Remarks" value="<?php echo $spesifikasi->keterangan; ?>" />
+                                <span style="color: red"><?php echo form_error("keterangan"); ?></span>
                             </div>
                         </div>
                         <div class="form-actions">

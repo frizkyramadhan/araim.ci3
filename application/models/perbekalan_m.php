@@ -323,7 +323,7 @@ class Perbekalan_m extends CI_Model
 
     function getSpecById($id)
     {
-        $this->db->select('id_spesifikasi, komponen.komponen, spesifikasi.spesifikasi, spesifikasi.is_active');
+        $this->db->select('id_spesifikasi, komponen.komponen, spesifikasi.spesifikasi, spesifikasi.keterangan');
         $this->db->from('spesifikasi');
         $this->db->join('komponen', 'spesifikasi.id_komponen = komponen.id_komponen', 'left');
         $this->db->join('perbekalan', 'spesifikasi.id_perbekalan = perbekalan.id_perbekalan', 'left');
