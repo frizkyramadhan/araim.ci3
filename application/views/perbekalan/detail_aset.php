@@ -322,16 +322,18 @@
     						`<table style="font-size : 13px;" class="table table-striped table-bordered table-hover">
 								<tr>
 									<th>Date</th>
+									<th>Component</th>
 									<th>Damage</th>
 									<th>Cost</th>
 								</tr>`
     					$.each(repair, function(i, data) {
     						trHTML +=
     							`<tr>
-									<td>` + data.date_repair + `</td>
-									<td>` + data.damage + `</td>
-									<td>` + data.cost + `</td>
-								</tr>`;
+								<td>` + data.date_repair + `</td>
+								<td>` + data.komponen + ` ` + data.spesifikasi + `</td>
+								<td>` + data.damage + `</td>
+								<td>` + data.cost + `</td>
+							</tr>`;
     					});
     					trHTML += `</table>`;
     					$('#repair-history').append(trHTML);
