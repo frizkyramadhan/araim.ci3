@@ -316,7 +316,7 @@
     			success: function(result) {
     				if (result.status == true) {
     					let repair = result.data;
-    					console.log(repair);
+    					// console.log(repair);
     					var trHTML = '';
     					trHTML +=
     						`<table style="font-size : 13px;" class="table table-striped table-bordered table-hover">
@@ -325,16 +325,25 @@
 									<th>Component</th>
 									<th>Damage</th>
 									<th>Cost</th>
-								</tr>`
+								</tr>`;
     					$.each(repair, function(i, data) {
     						trHTML +=
     							`<tr>
 								<td>` + data.date_repair + `</td>
 								<td>` + data.komponen + ` ` + data.spesifikasi + `</td>
 								<td>` + data.damage + `</td>
-								<td>` + data.cost + `</td>
+								<td><div align="right">` + data.cost + `</div></td>
 							</tr>`;
     					});
+
+    					// get sum of cost damage across all objects in array
+    					var total = repair.reduce(function(prev, cur) {
+    						return prev + parseInt(cur.cost);
+    					}, 0);
+    					trHTML += `<tr>
+					    			<td colspan="3"><div align="right"><b>Total</b></div></td>
+					    			<td><div align="right"><b>` + total + `</b></td>
+							</tr>`;
     					trHTML += `</table>`;
     					$('#repair-history').append(trHTML);
     				} else {
@@ -345,5 +354,7 @@
     				}
     			}
     		});
+
+    		// function
     	});
     </script>
