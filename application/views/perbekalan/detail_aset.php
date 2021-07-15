@@ -174,8 +174,8 @@
     									<td><?php echo $row->keterangan; ?></td>
     									<?php if ($pengguna->level != "Read Only") : ?>
     										<td style="text-align: center;">
-    											<?php echo anchor('perbekalan/edit_spec/' . $detail->id_perbekalan . '/' . $row->id_spesifikasi, '&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;', array('class' => 'btn btn-small btn-warning')) ?>
-    											<?php echo anchor('perbekalan/delete_spec/' . $detail->id_perbekalan . '/' . $row->id_spesifikasi, 'Delete', array('class' => 'btn btn-small btn-danger', 'onclick' => "return confirm('Are you sure to delete this specification?')")) ?>
+    											<?php echo anchor('perbekalan/edit_spec/' . $user->nik . '/' . $detail->id_perbekalan . '/' . $row->id_spesifikasi, '&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;', array('class' => 'btn btn-small btn-warning')) ?>
+    											<?php echo anchor('perbekalan/delete_spec/' . $user->nik . '/' . $detail->id_perbekalan . '/' . $row->id_spesifikasi, 'Delete', array('class' => 'btn btn-small btn-danger', 'onclick' => "return confirm('Are you sure to delete this specification?')")) ?>
     										</td>
     									<?php endif; ?>
     							</tr>

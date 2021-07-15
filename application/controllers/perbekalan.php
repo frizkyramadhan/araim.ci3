@@ -257,7 +257,7 @@ class Perbekalan extends CI_Controller
                 $query_2 = "INSERT INTO spesifikasi (id_perbekalan,id_komponen,spesifikasi,keterangan) VALUES ('$id_perbekalan','$id_komponen','$spesifikasi','$keterangan')";
                 $this->db->query($query_2);
             }
-            redirect('perbekalan/detail_aset/' . $id);
+            redirect('perbekalan/detail_aset/' . $nik . '/' . $id);
         }
     }
 
@@ -461,11 +461,11 @@ class Perbekalan extends CI_Controller
             $this->load->view('footer');
         } else {
             $this->perbekalan_m->insert_spec($id);
-            redirect('perbekalan/detail_aset/' . $id);
+            redirect('perbekalan/detail_aset/' . $nik . '/' . $id);
         }
     }
 
-    function edit_spec($id_perbekalan, $id)
+    function edit_spec($nik, $id_perbekalan, $id)
     {
         $data['title'] = "Edit Specification Asset";
         $data['subtitle'] = "Specification Asset";
@@ -491,13 +491,13 @@ class Perbekalan extends CI_Controller
             $this->load->view('footer');
         } else {
             $this->perbekalan_m->update_spec($id);
-            redirect('perbekalan/detail_aset/' . $id_perbekalan);
+            redirect('perbekalan/detail_aset/' . $nik . '/' . $id_perbekalan);
         }
     }
 
-    public function delete_spec($id_perbekalan, $id)
+    public function delete_spec($nik, $id_perbekalan, $id)
     {
         $this->perbekalan_m->delete_spesifikasi($id);
-        redirect('perbekalan/detail_aset/' . $id_perbekalan);
+        redirect('perbekalan/detail_aset/' . $nik . '/' . $id_perbekalan);
     }
 }

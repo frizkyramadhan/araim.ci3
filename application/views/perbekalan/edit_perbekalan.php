@@ -99,12 +99,12 @@
     								<input type="text" class="span6" name="lokasi" value="<?php echo $perbekalan->lokasi; ?>" />
     							</div>
     						</div>
-    						<div class="control-group">
+    						<!-- <div class="control-group">
     							<label class="control-label">Specification</label>
     							<div class="controls">
     								<textarea class="span8" rows="3" name="spesifikasi"><?php echo $perbekalan->spesifikasi; ?></textarea>
     							</div>
-    						</div>
+    						</div> -->
     						<div class="control-group">
     							<label class="control-label">Remark</label>
     							<div class="controls">
