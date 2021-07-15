@@ -63,17 +63,48 @@ class Perbekalan extends CI_Controller
         $this->form_validation->set_rules("po", 'PO', 'required');
         $this->form_validation->set_rules("jumlah", 'Qty', 'required');
         $this->form_validation->set_rules("remarks", 'Remarks', 'required');
-        $this->form_validation->set_rules("spesifikasi", 'Specification', 'required');
         $this->form_validation->set_rules("lokasi", 'Location', 'required');
 
         if ($this->form_validation->run() == FALSE) {
+            // if ($_POST == NULL) {
             $user = $this->db->query("select * from karyawan where nik = " . $nik)->row();
             $data['user'] = $user;
             $data['no_inv'] = $this->perbekalan_m->generateAutoid();
+            $data['komponen'] = $this->komponen_m->selectAll();
             $this->load->view('perbekalan/add_perbekalan', $data);
             $this->load->view('footer');
         } else {
-            $this->perbekalan_m->insert($_POST);
+            $input = array(
+                'id_karyawan' => $this->input->post('id_karyawan'),
+                'no_inv' => $this->input->post('no_inv'),
+                'status' => $this->input->post('status'),
+                'tanggal' => $this->input->post('tanggal'),
+                'id_aset' => $this->input->post('id_aset'),
+                'merk' => $this->input->post('merk'),
+                'model' => $this->input->post('model'),
+                'sn' => $this->input->post('sn'),
+                'pn' => $this->input->post('pn'),
+                'po' => $this->input->post('po'),
+                'ref_no' => $this->input->post('ref_no'),
+                'ref_date' => $this->input->post('ref_date'),
+                'jumlah' => $this->input->post('jumlah'),
+                'lokasi' => $this->input->post('lokasi'),
+                'remarks' => $this->input->post('remarks')
+            );
+            $this->db->insert('perbekalan', $input);
+            //input part
+            $id_perbekalan = $this->db->insert_id();
+            foreach ($_POST['rows'] as $key => $count) {
+                $id_komponen = $_POST['id_komponen_' . $count];
+                $spesifikasi = $_POST['spesifikasi_' . $count];
+                $keterangan = $_POST['keterangan_' . $count];
+
+                $query_2 = "INSERT INTO spesifikasi (id_perbekalan,id_komponen,spesifikasi,keterangan) VALUES ('$id_perbekalan','$id_komponen','$spesifikasi','$keterangan')";
+                $this->db->query($query_2);
+                // $query = $this->db->last_query();
+                // echo $query;
+            }
+            // die;
             redirect('perbekalan/detail/' . $nik);
         }
     }
@@ -193,13 +224,15 @@ class Perbekalan extends CI_Controller
         // }
     }
 
-    function detail_aset($id)
+    function detail_aset($nik, $id)
     {
         $data['title'] = "Inventory Data";
         $data['subtitle'] = "Asset Detail";
         $this->load->view('header', $data);
         $this->load->view('nav');
         if ($_POST == NULL) {
+            $user = $this->db->query("select * from karyawan where nik = " . $nik)->row();
+            $data['user'] = $user;
             $data['detail'] = $this->perbekalan_m->detail_aset($id);
             $data['spec'] = $this->perbekalan_m->getSpecById($id);
             $data['komponen'] = $this->komponen_m->selectAll();
@@ -358,14 +391,10 @@ class Perbekalan extends CI_Controller
     {
         $perbekalan = $this->perbekalan_m->detail_aset($id);
         //var_dump($perbekalan);
-        $isi_teks = "No. Inventori = " . $perbekalan->no_inv . "\n";
+        $isi_teks = "No. Aset = " . $perbekalan->no_inv . "\n";
         $isi_teks .= "Nama Aset = " . $perbekalan->nama_aset . "\n";
-        $isi_teks .= "Merk = " . $perbekalan->merk . "\n";
-        $isi_teks .= "Model = " . $perbekalan->model . "\n";
-        $isi_teks .= "Spesifikasi = " . $perbekalan->spesifikasi . "\n";
+        $isi_teks .= "Merk = " . $perbekalan->merk . " " . $perbekalan->model . "\n";
         $isi_teks .= "Lokasi = " . $perbekalan->lokasi . "\n";
-        //$isi_teks .= "Keterangan = ".$perbekalan->remarks."\n";
-        // $qrCode = new Endroid\QrCode\QrCode('No. Inventori = '.$perbekalan->no_inv.'');
         $qrCode = new Endroid\QrCode\QrCode($isi_teks);
         $qrCode->writeFile('img/qrcode/qr-' . $perbekalan->id_perbekalan . '.png');
         //$qrCode->setText($isi_teks);

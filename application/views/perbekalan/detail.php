@@ -113,7 +113,7 @@
                                         <?php $n = 1; ?>
                                         <?php foreach ($detail as $row) : ?>
                                             <!--<td><?php // echo form_checkbox('check[]',$row->id_perbekalan);
-                                                        ?></td>-->
+                                                    ?></td>-->
                                             <td><?php echo $n++; ?></td>
                                             <td>
                                                 <div align="center">
@@ -150,7 +150,7 @@
                                             </td>
                                             <td>
                                                 <div align="center">
-                                                    <?php echo anchor('perbekalan/detail_aset/' . $row->id_perbekalan, 'Detail', array('class' => 'btn btn-mini btn-primary')) ?>
+                                                    <?php echo anchor('perbekalan/detail_aset/' . $row->nik . '/' . $row->id_perbekalan, 'Detail', array('class' => 'btn btn-mini btn-primary')) ?>
                                                     <?php if ($pengguna->level != "Read Only") : ?>
                                                         <?php echo anchor('perbekalan/edit/' . $row->nik . '/' . $row->id_perbekalan, '&nbspEdit&nbsp', array('class' => 'btn btn-mini btn-success')); ?>
                                                     <?php endif; ?>

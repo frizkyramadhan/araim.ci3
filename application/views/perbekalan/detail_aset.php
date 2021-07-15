@@ -22,7 +22,7 @@
     			<div class="box-header" data-original-title>
     				<h2><i class="halflings-icon white edit"></i><span class="break"></span><?php echo $subtitle; ?></h2>
     				<div class="box-icon">
-
+    					<a href="<?php echo base_url('perbekalan/detail/' . $user->nik); ?>"><i class="halflings-icon white chevron-left"></i></a>
     					<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
     					<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
     				</div>
@@ -141,14 +141,18 @@
     			<div class="box-header" data-original-title>
     				<h2><i class="halflings-icon white cog"></i><span class="break"></span>Specification</h2>
     				<div class="box-icon">
-    					<?php if ($pengguna->level == "Admin") : ?>
+    					<!-- <?php if ($pengguna->level == "Admin") : ?>
     						<a href="<?php echo site_url('perbekalan/add_spec/' . $detail->id_perbekalan) ?>" class="halflings-icon white plus"></a>
-    					<?php endif; ?>
+    					<?php endif; ?> -->
     					<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
     					<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
     				</div>
     			</div>
     			<div class="box-content">
+    				<div class="alert alert-info">
+    					<button type="button" class="close" data-dismiss="alert">×</button>
+    					If this asset doesn't have specification, choose <strong>Other</strong> in Component
+    				</div>
     				<form role="form" action="" method="post">
     					<input name="id_perbekalan" type="hidden" value="<?php echo $detail->id_perbekalan; ?>" class="medium">
     					<table class="table table-condensed" width=100%>
@@ -248,39 +252,13 @@
     </div>
     <!--/.fluid-container-->
     <script type="text/javascript">
-    	// var count = 0;
-    	// $(function() {
-    	// 	$("#addRow").click(function() {
-    	// 		row = `
-    	// 		<tr>
-    	// 		<td>
-    	// 		<?php
-					// 		$conn = mysqli_connect('localhost', 'root', '@rk@*', 'esis');
-					// 		$sql = mysqli_query($conn, 'select * from komponen order by komponen asc');
-					// 		if (mysqli_num_rows($sql)) {
-					// 			$select = "<select name=id_komponen[] style=width:100%>";
-					// 			while ($rs = mysqli_fetch_array($sql)) {
-					// 				$select .= '<option value="' . $rs["id_komponen"] . '">' . $rs["komponen"] . '</option>';
-					// 			}
-					// 		}
-					// 		$select .= '</select>';
-					// 		echo $select;
-					// 		
-					?>
-    	// 		</td>
-    	//         <td><input name="spesifikasi_` + count + `" type="text" style="height:24px; width: 100%"></td>
-    	//         <td><input name="keterangan_` + count + `" type="text" style="height:24px; width: 100%"></td>
-    	//         <td><button type="button" class="del btn btn-small btn-danger">Delete</button></td>
-    	//         </tr>`;
-    	// 		$(row).insertBefore("#last");
-    	// 	});
-    	// });
     	var count = 0;
     	$(function() {
     		$("#addRow").click(function() {
     			count += 1;
     			row = `<tr>
-    				<input id="id_perbekalan_` + count + `" name="id_perbekalan_` + count + `" type="hidden" style="width: 95%" value="" readonly="TRUE"><input id="rows_` + count + `" name="rows[]" value="` + count + `" type="hidden">
+    				<input id="id_perbekalan_` + count + `" name="id_perbekalan_` + count + `" type="hidden" style="width: 95%" value="" readonly="TRUE">
+				<input id="rows_` + count + `" name="rows[]" value="` + count + `" type="hidden">
     				<td style="padding: 5px">
     				<select name="id_komponen_` + count + `" style="width:100%">
     				<option value = "" > --Choose Component-- </option>
