@@ -39,34 +39,35 @@
 					<div class="box-content">
                                             <form class="form-horizontal" role="form" action="" method="post">
 						  <fieldset>
+							<?php $this->load->view('karyawan/hero_search'); ?>
 							<div class="control-group">
                                                             <label class="control-label">NIK</label>
 							  <div class="controls">
-                                                              <input type="text" class="span6" name="nik"/>
+                                                              <input type="text" class="span6" name="nik" value="<?php echo isset($posted['nik']) ? htmlspecialchars($posted['nik'], ENT_QUOTES, 'UTF-8') : ''; ?>"/>
 							  </div>
 							</div>
 							<div class="control-group">
                                                             <label class="control-label">Name</label>
 							  <div class="controls">
-                                                              <input type="text" class="span6" name="nama"/>
+                                                              <input type="text" class="span6" name="nama" value="<?php echo isset($posted['nama']) ? htmlspecialchars($posted['nama'], ENT_QUOTES, 'UTF-8') : ''; ?>"/>
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label">Position</label>
 							  <div class="controls">
-                                                              <?=form_dropdown('id_jabatan',$jabatan,'','class="span6" data-rel="chosen"');?>
+                                                              <?=form_dropdown('id_jabatan',$jabatan,isset($selected_jabatan)?$selected_jabatan:'','class="span6" data-rel="chosen"');?>
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label">Project</label>
 							  <div class="controls">
-                                                              <?=form_dropdown('id_project',$project,'','class="span6" data-rel="chosen"');?>
+                                                              <?=form_dropdown('id_project',$project,isset($selected_project)?$selected_project:'','class="span6" data-rel="chosen"');?>
 							  </div>
 							</div>
                                                         <div class="control-group">
                                                             <label class="control-label">Email</label>
 							  <div class="controls">
-                                                              <input type="text" class="span6" name="email"/>
+                                                              <input type="text" class="span6" name="email" value="<?php echo isset($posted['email']) ? htmlspecialchars($posted['email'], ENT_QUOTES, 'UTF-8') : ''; ?>"/>
 							  </div>
 							</div>
 							<div class="form-actions">

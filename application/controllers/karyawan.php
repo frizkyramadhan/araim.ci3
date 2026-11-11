@@ -11,6 +11,7 @@ class Karyawan extends CI_Controller{
         $this->load->model('jabatan_m');
         $this->load->model('project_m');
         $this->load->model('login_m');
+        $this->karyawan_m->ensure_hero_employee_id();
         }
     }
     
@@ -54,10 +55,30 @@ class Karyawan extends CI_Controller{
         $data['project'] = $ddmenu1;
         
         if($_POST==NULL){
+            $data['hero_employee_id'] = '';
+            $data['error'] = '';
+            $data['posted'] = array();
+            $data['selected_jabatan'] = '';
+            $data['selected_project'] = '';
             $this->load->view('karyawan/add_karyawan', $data);
             $this->load->view('footer');
         } else {
-            $this->karyawan_m->insert($_POST);
+            $row = $this->_karyawan_row_from_post();
+            if ($row === FALSE) {
+                $data['hero_employee_id'] = $this->input->post('hero_employee_id');
+                $data['error'] = 'Arka Hero employee was not found. Search by name or current NIK and pick a person.';
+                $data['posted'] = array(
+                    'nik' => $this->input->post('nik'),
+                    'nama' => $this->input->post('nama'),
+                    'email' => $this->input->post('email'),
+                );
+                $data['selected_jabatan'] = $this->input->post('id_jabatan');
+                $data['selected_project'] = $this->input->post('id_project');
+                $this->load->view('karyawan/add_karyawan', $data);
+                $this->load->view('footer');
+                return;
+            }
+            $this->karyawan_m->insert($row);
             redirect('karyawan');
         }
     }
@@ -136,12 +157,50 @@ class Karyawan extends CI_Controller{
             $data['karyawan'] = $this->karyawan_m->select($id);
             $data['select_jabatan'] = $this->karyawan_m->select_jabatan($id);
             $data['select_project'] = $this->karyawan_m->select_project($id);
+            $data['hero_employee_id'] = isset($data['karyawan']->hero_employee_id) ? $data['karyawan']->hero_employee_id : '';
+            $data['error'] = '';
             $this->load->view('karyawan/edit_karyawan', $data);
             $this->load->view('footer');
         } else {
-            $this->karyawan_m->update($id);
+            $row = $this->_karyawan_row_from_post();
+            if ($row === FALSE) {
+                $data['karyawan'] = $this->karyawan_m->select($id);
+                $data['karyawan']->nik = $this->input->post('nik');
+                $data['karyawan']->nama = $this->input->post('nama');
+                $data['karyawan']->email = $this->input->post('email');
+                $data['select_jabatan'] = array('id_jabatan' => $this->input->post('id_jabatan'));
+                $data['select_project'] = array('id_project' => $this->input->post('id_project'));
+                $data['hero_employee_id'] = $this->input->post('hero_employee_id');
+                $data['error'] = 'Arka Hero employee was not found. Search by name or current NIK and pick a person.';
+                $this->load->view('karyawan/edit_karyawan', $data);
+                $this->load->view('footer');
+                return;
+            }
+            $this->karyawan_m->update($id, $row);
             redirect('karyawan');
         }
+    }
+
+    function search_hero() {
+        $people = $this->karyawan_m->search_hero($this->input->get('q'));
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(array('data' => $people)));
+    }
+
+    function _karyawan_row_from_post() {
+        $hero = $this->karyawan_m->confirmed_hero_employee_id($this->input->post('hero_employee_id'));
+        if ($hero === FALSE) {
+            return FALSE;
+        }
+        return array(
+            'nik' => $this->input->post('nik'),
+            'nama' => $this->input->post('nama'),
+            'id_jabatan' => $this->input->post('id_jabatan'),
+            'id_project' => $this->input->post('id_project'),
+            'email' => $this->input->post('email'),
+            'hero_employee_id' => $hero,
+        );
     }
     
     function detail($nik) {

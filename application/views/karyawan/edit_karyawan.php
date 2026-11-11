@@ -39,6 +39,7 @@
 					<div class="box-content">
                                             <form class="form-horizontal" role="form" action="" method="post">
 						  <fieldset>
+							<?php $this->load->view('karyawan/hero_search'); ?>
 							<div class="control-group">
                                                             <label class="control-label">NIK</label>
 							  <div class="controls">

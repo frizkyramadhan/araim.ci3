@@ -39,6 +39,12 @@
 							  </div>
 							</div>
 							<div class="control-group">
+                                                            <label class="control-label">Hero employee id</label>
+							  <div class="controls">
+                                                              <input type="text" class="input-xlarge disabled span6" disabled="" value="<?php echo !empty($detail->hero_employee_id) ? htmlspecialchars($detail->hero_employee_id, ENT_QUOTES, 'UTF-8') : ''; ?>"/>
+							  </div>
+							</div>
+							<div class="control-group">
                                                             <label class="control-label">Name</label>
 							  <div class="controls">
                                                               <input type="text" class="input-xlarge disabled span6" id="disabledInput" disabled="" name="nama" value="<?php echo $detail->nama ?>"/>

@@ -28,6 +28,7 @@
                                                     <tr>
                                                         <th>No</th>
                                                         <th>NIK</th>
+                                                        <th>Hero employee id</th>
                                                         <th>Name</th>
                                                         <th>Position</th>
                                                         <!--<th>Department</th>-->
@@ -41,6 +42,7 @@
                                                         <?php foreach ($karyawan as $row): ?>
                                                         <td><?php echo $i++?></td>
                                                         <td><a href="<?php echo site_url('karyawan/detail/'.$row->nik); ?>"><?php echo $row->nik; ?></a></td>
+                                                        <td><?php echo !empty($row->hero_employee_id) ? htmlspecialchars($row->hero_employee_id, ENT_QUOTES, 'UTF-8') : ''; ?></td>
                                                         <td><?php echo $row->nama; ?></td>
                                                         <td><?php echo $row->nama_jabatan; ?></td>
                                                         <!--<td><?php echo $row->nama_dept; ?></td>-->

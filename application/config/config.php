@@ -17,6 +17,22 @@
 $config['base_url']	= 'http://localhost/araim/';
 
 /*
+| Hero app root, no /api suffix. Override with HERO_API_BASE.
+| HERO_API_KEY is sent as X-API-Key. The karyawan menu stores employees.id.
+*/
+$hero_api_base = getenv('HERO_API_BASE');
+if (!$hero_api_base && isset($_SERVER['HERO_API_BASE'])) {
+	$hero_api_base = $_SERVER['HERO_API_BASE'];
+}
+$config['hero_api_base'] = $hero_api_base ? rtrim($hero_api_base, '/') : 'http://192.168.32.146:8080';
+
+$hero_api_key = getenv('HERO_API_KEY');
+if (!$hero_api_key && isset($_SERVER['HERO_API_KEY'])) {
+	$hero_api_key = $_SERVER['HERO_API_KEY'];
+}
+$config['hero_api_key'] = $hero_api_key ? $hero_api_key : '';
+
+/*
 |--------------------------------------------------------------------------
 | Index File
 |--------------------------------------------------------------------------

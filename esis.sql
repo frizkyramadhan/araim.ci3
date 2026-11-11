@@ -255,6 +255,7 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
   `id_jabatan` int(11) DEFAULT NULL,
   `id_project` int(11) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `hero_employee_id` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`id_karyawan`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1419 ;
 
